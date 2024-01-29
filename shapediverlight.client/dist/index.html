@@ -1,0 +1,135 @@
+<html>
+<head>
+    <title>ShapeDiver Sandbox</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/quicksettings@latest/quicksettings.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>.login-container { 
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+            .login-container h2 {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .login-container form {
+                margin-bottom: 0;
+            }
+
+
+        .qs_color {
+            position: relative !important;
+            left: 0px !important;
+        }
+
+        .qs_main {
+            width: 40% !important;
+            right: 0px !important;
+            top: 6% !important; 
+        }</style>
+
+</head>
+
+<body>
+    <div class="container" id="loginPanel">
+        <div class="login-container">
+            <h2>Shape Diver</h2>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username" required="">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" required="">
+            </div>
+            <button onclick="login()" class="btn btn-primary btn-block">Login</button>
+
+        </div>
+    </div>
+
+    <div style="width: 50%; height: 100%; margin-left:3%">
+        <button class="btn btn-warning" onclick="logout()" id="logBtn">Log Out</button>
+        <button class="btn btn-info" onclick="saveData()" id="saveBtn" style="position: absolute;right: 0px;top: 0px;z-index:1000000 !important">Save</button>
+        <canvas id="canvas"></canvas>
+    </div>
+
+
+    <script src="/src.f10117fe.js"></script>
+    <script>function login() {
+  //const url = 'http://localhost:5253/api/Common/GetAuthenticate'; // Replace with your actual API endpoint
+  //try {
+  //    var requestBody = { username: 'test', password: 'test' }
+
+  //    const response = await fetch(url, {      
+  //        method: 'POST',
+  //        headers: { 
+  //            'Content-Type': 'application/json',
+  //            // You can include additional headers if required
+  //            // 'Authorization': 'Bearer your_access_token',
+  //        },
+  //        body: JSON.stringify(requestBody),
+  //    });
+
+  //    // Check if the request was successful (status code 2xx)
+  //    if (response.ok) {
+  //        const data = await response.json();
+  //        console.log(data)
+  //        //console.log('Submitted credentials:', credentials);
+  //        localStorage.setItem("token", data);
+  //        window.location.reload();
+  //    } else {
+  //        console.error('Error:', response.statusText);
+  //    }
+  //} catch (error) {
+  //    console.error('Error:');
+  //}
+  localStorage.setItem("token", "true");
+  window.location.reload();
+}
+function logout() {
+  localStorage.removeItem("token");
+  window.location.reload();
+}
+function saveData() {
+  debugger;
+  // Define the URL to send the POST request to
+  var url = 'http://localhost:5253/api/Common/InsertParamiters';
+  var requestBody = {
+    'menuOption': "",
+    'seledModel': JSON.stringify(localStorage.getItem("dataModel"))
+  };
+
+  // Define the options for the fetch request
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json' // Specify the content type as JSON
+    },
+    body: JSON.stringify(requestBody) // Convert the body to JSON format
+  };
+
+  // Send the fetch request
+  fetch(url, options).then(function (response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    } else {
+      alert("Parameters added Successfully !");
+    }
+  }).then(function (data) {
+    console.log('Response data:', data); // Handle the response data
+  }).catch(function (error) {
+    console.error('There was a problem with the fetch operation:', error); // Handle errors
+  });
+}</script>
+
+</body>
+</html>

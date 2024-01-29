@@ -1,0 +1,23 @@
+{
+  "name": "material-update-gltf-2-metalness-roughness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --port 8080 --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@shapediver/viewer": "2.9.2",
+    "parcel-bundler": "^1.6.1",
+    "tsyringe": "4.6.0"
+  },
+  "devDependencies": {
+    "typescript": "4.2.3"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  },
+  "keywords": [],
+  "proxy": "http://localhost:8080"
+}
